@@ -149,15 +149,12 @@ export const filterProductsByOtherFilters = (state, action) => {
 
 export const searchByProductName = (state, action) => {
   const searchValue = action.payload.toLowerCase();
-  let products;
+  let products = filterProductsByAppliedFilters({ state });
   if (searchValue) {
-    products = [...state.products].filter((product) =>
+    products = products.filter((product) =>
       product.title.toLowerCase().includes(searchValue)
     );
-  } else {
-    products = filterProductsByAppliedFilters({ state });
   }
-
   return {
     ...state,
     products,
