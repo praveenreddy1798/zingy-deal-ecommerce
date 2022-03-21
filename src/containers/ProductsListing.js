@@ -15,7 +15,10 @@ const ProductsListing = () => {
       <ProductsFilterSection />
       <main class="main-section main-section-filter-mob">
         <Loader loading={loading} />
-        <div class="grid responsive-grid w-100 pd-sm">
+        <div class="grid responsive-grid w-100 pd-md">
+          {!products.length && (
+            <h1>Sorry, We couldn't find the product you are looking for.</h1>
+          )}
           {products?.map((product, index) => {
             return <Card key={index} product={product} />;
           })}
