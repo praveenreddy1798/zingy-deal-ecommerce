@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useProducts } from "../context/products";
 import { useAxios } from "../hooks";
-import { getProductsWithSortByPriceAndRatingApplied } from "../utils";
 
-export const useQueryAllProducts = (url) => {
+export const useQueryAllProducts = (url, searchParam) => {
   const { productsDispatch } = useProducts();
+  const searchParamKey = Object.keys(searchParam)?.[0];
+  const searchParamValue = Object.values(searchParam)?.[0];
   const axiosParam = {
     method: "GET",
     url,
@@ -12,17 +13,11 @@ export const useQueryAllProducts = (url) => {
   const { data, loading, error } = useAxios(axiosParam);
   useEffect(() => {
     if (data?.products) {
-      const productsWithDefaultFilters =
-        getProductsWithSortByPriceAndRatingApplied(
-          data.products,
-          "low_to_high",
-          5
-        );
       productsDispatch({
         type: "SET_PRODUCTS",
-        payload: productsWithDefaultFilters,
+        payload: { products: data.products, searchParamKey, searchParamValue },
       });
     }
-  }, [data?.products, productsDispatch]);
+  }, [data?.products, productsDispatch, searchParamKey, searchParamValue]);
   return { loading, error };
 };

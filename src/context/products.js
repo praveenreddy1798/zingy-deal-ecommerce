@@ -1,7 +1,7 @@
 import { createContext, useContext, useReducer } from "react";
 import { productsReducer } from "../reducers";
 
-const initialState = {
+export const productsInitialState = {
   originalData: [],
   products: [],
   wishlist: [],
@@ -16,12 +16,12 @@ const initialState = {
   selectedOtherFilters: [],
 };
 
-const ProductsContext = createContext(initialState);
+const ProductsContext = createContext(productsInitialState);
 
 const ProductsProvider = ({ children }) => {
   const [productsState, productsDispatch] = useReducer(
     productsReducer,
-    initialState
+    productsInitialState
   );
   return (
     <ProductsContext.Provider value={{ productsState, productsDispatch }}>

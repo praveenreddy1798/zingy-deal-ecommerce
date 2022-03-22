@@ -34,7 +34,7 @@ export const products = [
     deliveryDuration: 1,
     deliveryCharge: 0,
     rating: 4.5,
-    inStock: false,
+    inStock: true,
     arrivalType: "New",
     categoryName: "men",
     image:
@@ -207,7 +207,7 @@ export const products = [
     deliveryDuration: 2,
     deliveryCharge: 30,
     rating: 4,
-    inStock: false,
+    inStock: true,
     arrivalType: "New",
     categoryName: "women",
     image:
@@ -348,7 +348,7 @@ export const products = [
     deliveryDuration: 2,
     deliveryCharge: 30,
     rating: 4,
-    inStock: false,
+    inStock: true,
     arrivalType: "New",
     categoryName: "kids",
     image:

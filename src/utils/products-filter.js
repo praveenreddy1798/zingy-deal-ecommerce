@@ -27,7 +27,7 @@ const filterProductsByOtherFiltersApplied = (products, selectedFilters) =>
     );
   });
 
-const filterProductsByAppliedFilters = ({
+export const filterProductsByAppliedFilters = ({
   state,
   categoryFilters,
   otherFilters,

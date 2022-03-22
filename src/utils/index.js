@@ -6,6 +6,7 @@ export {
   getProductsWithSortByPriceAndRatingApplied,
   clearProductsFilter,
   searchByProductName,
+  filterProductsByAppliedFilters,
 } from "./products-filter";
 
 export { setProducts } from "./products";

@@ -4,10 +4,14 @@ import { Navbar } from "../components/Navbar";
 import { useQueryAllProducts } from "../services/api";
 import { useProducts } from "../context/products";
 import { Loader } from "../components/Loader";
+import { useLocation } from "react-router-dom";
 const ProductsListing = () => {
+  const location = useLocation();
+  let searchParam = new URLSearchParams(location.search);
+  searchParam = Object.fromEntries(searchParam);
   const { productsState } = useProducts();
   const { products } = productsState;
-  const { loading } = useQueryAllProducts("/api/products");
+  const { loading } = useQueryAllProducts("/api/products", searchParam);
 
   return (
     <div class="page-wrapper page-wrapper-filter-mob">
