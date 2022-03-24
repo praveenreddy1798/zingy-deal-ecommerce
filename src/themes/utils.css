@@ -168,6 +168,11 @@
   animation: spin 2s linear infinite;
 }
 
+.password {
+  margin-left: -2rem;
+  padding: 0.5rem;
+}
+
 /* Safari */
 @-webkit-keyframes spin {
   0% {
@@ -201,6 +206,15 @@
 
 .aspect-ratio-initial {
   aspect-ratio: initial;
+}
+
+.alert {
+  top: 0.875rem;
+  left: 50%;
+  min-width: 15rem;
+  max-width: max-content;
+  transform: translateX(-50%);
+  z-index: 2;
 }
 
 @media only screen and (max-width: 600px) {

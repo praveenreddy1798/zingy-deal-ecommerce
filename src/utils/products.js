@@ -36,3 +36,19 @@ export const setProducts = (_, action) => {
     products: filteredProducts,
   };
 };
+
+export const setWishlistProducts = (state, action) => {
+  const { wishlist } = action.payload;
+  return {
+    ...state,
+    wishlist,
+  };
+};
+
+export const setCartProducts = (state, action) => {
+  const { cart } = action.payload;
+  return {
+    ...state,
+    cart,
+  };
+};

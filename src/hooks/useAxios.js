@@ -1,27 +1,35 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-export const useAxios = ({ url, method, body = null, headers = null }) => {
-  const [error, setError] = useState(null);
+export const useAxios = (
+  { url, method, body = null, headers = null },
+  enabled = true
+) => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
     const axiosRequest = async () => {
       try {
-        const { data } = await axios.request({
+        const response = await axios({
           url,
           method,
-          body,
           headers,
+          data: { ...body },
         });
-        setData(data);
+        const { data, status } = response;
+        if (status >= 200 && status < 300 && data) {
+          setData(data);
+        }
       } catch (error) {
-        setError(error);
+        setErrorMessage(error.message);
       } finally {
         setLoading(false);
       }
     };
-    axiosRequest();
-  }, [body, headers, method, url]);
-  return { error, loading, data };
+    if (enabled) {
+      axiosRequest();
+    }
+  }, [body, headers, method, url, enabled]);
+  return { errorMessage, loading, data };
 };

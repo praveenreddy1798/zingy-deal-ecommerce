@@ -14,6 +14,7 @@ export const productsInitialState = {
   sortByPrice: "low_to_high",
   selectedRating: 5,
   selectedOtherFilters: [],
+  toast: { isVisible: false, sucessMessage: null, errorMessage: null },
 };
 
 const ProductsContext = createContext(productsInitialState);

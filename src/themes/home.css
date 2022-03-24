@@ -54,6 +54,7 @@
   .banner {
     height: 15rem;
     object-fit: fill;
+    aspect-ratio: initial;
   }
 
   .text-overlay-image {

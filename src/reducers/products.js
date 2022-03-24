@@ -6,12 +6,18 @@ import {
   clearProductsFilter,
   setProducts,
   searchByProductName,
+  setWishlistProducts,
+  setCartProducts,
 } from "../utils";
 
 export const productsReducer = (state, action) => {
   switch (action.type) {
     case "SET_PRODUCTS":
       return setProducts(state, action);
+    case "SET_WISHLIST_PRODUCTS":
+      return setWishlistProducts(state, action);
+    case "SET_CART_PRODUCTS":
+      return setCartProducts(state, action);
     case "SORT_PRODUCTS_BY_PRICE":
       return sortProductsByPrice(state, action);
     case "FILTER_PRODUCTS_BY_RATING":

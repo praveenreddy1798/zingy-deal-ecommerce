@@ -1,7 +1,7 @@
 import { Card } from "../components/Card";
 import { ProductsFilterSection } from "../components/ProductsFilterSection";
 import { Navbar } from "../components/Navbar";
-import { useQueryAllProducts } from "../services/api";
+import { useQueryAllProducts } from "../services";
 import { useProducts } from "../context/products";
 import { Loader } from "../components/Loader";
 import { useLocation } from "react-router-dom";
@@ -15,7 +15,7 @@ const ProductsListing = () => {
 
   return (
     <div class="page-wrapper page-wrapper-filter-mob">
-      <Navbar />
+      <Navbar displaySearch />
       <ProductsFilterSection />
       <main class="main-section main-section-filter-mob">
         <Loader loading={loading} />

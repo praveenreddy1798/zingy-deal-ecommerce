@@ -4,17 +4,20 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { ProductsProvider } from "./context/products";
 import App from "./App";
 import { makeServer } from "./server";
+import { ToastProvider } from "./context/toast";
 
 // Call make Server
 makeServer();
 
 ReactDOM.render(
   <React.StrictMode>
-    <ProductsProvider>
-      <Router>
-        <App />
-      </Router>
-    </ProductsProvider>
+    <ToastProvider>
+      <ProductsProvider>
+        <Router>
+          <App />
+        </Router>
+      </ProductsProvider>
+    </ToastProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
