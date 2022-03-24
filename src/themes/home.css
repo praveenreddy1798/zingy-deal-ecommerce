@@ -1,0 +1,71 @@
+.arrival-left-section,
+.arrival-right-section {
+  background-color: var(--lynx-gray-dark);
+  height: 100%;
+}
+
+.text-overlay-card {
+  height: auto;
+  cursor: pointer;
+  width: 100%;
+}
+
+.home-arrival {
+  width: 50%;
+  cursor: pointer;
+}
+
+.text-overlay-image {
+  object-fit: fit;
+}
+
+.overlay-text-container {
+  height: 3rem;
+}
+
+@media only screen and (max-width: 1024px) {
+  .text-overlay-card {
+    height: 17.5rem;
+  }
+  .text-overlay-image {
+    height: 40rem;
+    object-fit: cover;
+    object-position: top;
+  }
+  .text-overlay-card {
+    height: max-content;
+  }
+  .grid-3 {
+    grid-template-columns: initial;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .text-overlay-card {
+    height: 15rem;
+  }
+  .home-arrival {
+    width: 100%;
+  }
+  .arrival-sale-section {
+    flex-wrap: wrap;
+  }
+
+  .banner {
+    height: 15rem;
+    object-fit: fill;
+    aspect-ratio: initial;
+  }
+
+  .text-overlay-image {
+    height: 30rem;
+    object-fit: fill;
+  }
+  .text-overlay-card {
+    height: max-content;
+  }
+
+  .grid-3 {
+    grid-template-columns: initial;
+  }
+}

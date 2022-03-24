@@ -1,2 +1,3 @@
-# zingy-deal-ecommerce
-An e-commerce store for clothing line
+## Zingy Deal
+
+An ecommerce store for clothing line.
