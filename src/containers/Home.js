@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Message } from "../components/Message";
 import { Navbar } from "../components/Navbar";
 import "../themes/home.css";
 
@@ -8,7 +7,6 @@ const Home = () => {
     <div class="page-wrapper page-wrapper-filter-mob">
       <Navbar />
       <main class="main-section main-section-strech pd-md">
-        <Message />
         <div class="flex-vertical gap-2 justify-between">
           <Link to="/products">
             <img

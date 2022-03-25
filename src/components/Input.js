@@ -27,7 +27,9 @@ export const Input = ({
           <i
             onClick={() => setShowPassword(!showPassword)}
             className={
-              !showPassword ? "password fa fa-eye-slash" : "password fa fa-eye"
+              !showPassword
+                ? "password pointer fa fa-eye-slash"
+                : "password pointer fa fa-eye"
             }
             aria-hidden="true"
           ></i>

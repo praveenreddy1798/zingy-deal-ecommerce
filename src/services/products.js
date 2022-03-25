@@ -10,7 +10,7 @@ export const useQueryAllProducts = (url, searchParam) => {
     method: "GET",
     url,
   };
-  const { data, loading, error } = useAxios(axiosParam);
+  const { data, loading } = useAxios(axiosParam);
   useEffect(() => {
     if (data?.products) {
       productsDispatch({
@@ -19,5 +19,5 @@ export const useQueryAllProducts = (url, searchParam) => {
       });
     }
   }, [data?.products, productsDispatch, searchParamKey, searchParamValue]);
-  return { loading, error };
+  return { loading };
 };

@@ -6,7 +6,6 @@ import { useForm } from "../hooks/useForm";
 import { validateLoginForm } from "../form-validation/login";
 import { useLogin } from "../services";
 import { useEffect } from "react";
-import { Message } from "../components/Message";
 
 const Login = () => {
   const handleLogin = (payload) => {
@@ -32,7 +31,6 @@ const Login = () => {
     <div class="page-wrapper">
       <Navbar />
       <main class="main-section main-section-strech flex-center pd-md">
-        <Message />
         <div class="flex-center bg-white w-max-content">
           <form onSubmit={handleSubmit}>
             <div class="flex-vertical pd-xlg w-max-content">

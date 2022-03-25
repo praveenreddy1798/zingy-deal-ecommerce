@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 export const useAxios = (
-  { url, method, body = null, headers = null },
+  { url, method, payload, token = null },
   enabled = true
 ) => {
   const [loading, setLoading] = useState(true);
@@ -14,8 +14,8 @@ export const useAxios = (
         const response = await axios({
           url,
           method,
-          headers,
-          data: { ...body },
+          headers: token ? { authorization: token } : null,
+          data: payload,
         });
         const { data, status } = response;
         if (status >= 200 && status < 300 && data) {
@@ -30,6 +30,6 @@ export const useAxios = (
     if (enabled) {
       axiosRequest();
     }
-  }, [body, headers, method, url, enabled]);
+  }, [method, url, enabled, token, payload]);
   return { errorMessage, loading, data };
 };

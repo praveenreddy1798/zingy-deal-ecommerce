@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useProducts } from "../context/products";
-import { getStrippedText } from "../utils";
+import { useAddToWishlist, useRemoveFromWishlist } from "../services";
+import { getStrippedText, inWishlist } from "../utils";
 
 export const Card = ({ product, cardType }) => {
   const {
     title,
-    wishlisted,
     inCart,
-    id,
+    _id,
     originalPrice,
     discountedPrice,
     discountPercentage,
@@ -19,33 +19,34 @@ export const Card = ({ product, cardType }) => {
     image,
   } = product;
   const navigate = useNavigate();
-  const { productsDispatch } = useProducts();
+  const { addToWishlist } = useAddToWishlist();
+  const { removeFromWishlist } = useRemoveFromWishlist();
+  const { productsDispatch, productsState } = useProducts();
+  const { wishlist } = productsState;
   return (
-    <div class="card">
+    <div class="card" key={_id}>
       <div class="card-image-container h-100 w-100 position-relative flex-evenly">
         <img
           alt="product"
-          onClick={() => navigate(`/product/${id}`)}
+          onClick={() => navigate(`/product/${_id}`)}
           class="card-image pointer"
           src={image}
           loading="lazy"
         />
         <button
           onClick={() =>
-            wishlisted
-              ? productsDispatch({
-                  type: "REMOVE_FROM_WISHLIST",
-                  payload: { ...product },
-                })
-              : productsDispatch({
-                  type: "ADD_TO_WISHLIST",
-                  payload: { ...product },
-                })
+            inWishlist(wishlist, _id)
+              ? removeFromWishlist(`/api/user/wishlist/${_id}`, product)
+              : addToWishlist(product)
           }
           class="btn btn-icon btn-icon-card position-absolute wishlist rounded flex-center"
         >
           <i
-            className={wishlisted ? "fa fa-heart fa-2x" : "fa fa-heart-o fa-2x"}
+            className={
+              inWishlist(wishlist, _id)
+                ? "fa fa-heart fa-2x"
+                : "fa fa-heart-o fa-2x"
+            }
           ></i>
         </button>
         {arrivalType && (
