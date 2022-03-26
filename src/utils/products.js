@@ -39,4 +39,9 @@ export const setProducts = (productsState, action) => {
   };
 };
 
-
+export const setSelectedProduct = (state, action) => {
+  return {
+    ...state,
+    selectedProduct: action.payload,
+  };
+};

@@ -8,12 +8,15 @@ import {
   searchByProductName,
   setWishlistProducts,
   setCartProducts,
+  setSelectedProduct,
 } from "../utils";
 
 export const productsReducer = (state, action) => {
   switch (action.type) {
     case "SET_PRODUCTS":
       return setProducts(state, action);
+    case "SET_SELECTED_PRODUCT":
+      return setSelectedProduct(state, action);
     case "SET_WISHLIST_PRODUCTS":
       return setWishlistProducts(state, action);
     case "SET_CART_PRODUCTS":

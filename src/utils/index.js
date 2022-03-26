@@ -9,7 +9,7 @@ export {
   filterProductsByAppliedFilters,
 } from "./products-filter";
 
-export { setProducts } from "./products";
+export { setProducts, setSelectedProduct } from "./products";
 
 export {
   setWishlistProducts,

@@ -1,6 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 import "./index.css";
-import { Home, ProductsListing, Login, Signup, Wishlist } from "./containers";
+import {
+  Home,
+  ProductsListing,
+  Login,
+  Signup,
+  Wishlist,
+  ProductDetail,
+} from "./containers";
 import { Message } from "./components";
 
 export default function App() {
@@ -14,6 +21,7 @@ export default function App() {
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/wishlist" element={<Wishlist />} />
         <Route exact path="/cart" />
+        <Route exact path="/products/:productId" element={<ProductDetail />} />
       </Routes>
     </div>
   );
