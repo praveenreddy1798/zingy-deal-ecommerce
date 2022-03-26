@@ -9,7 +9,7 @@ const ProductDetail = () => {
   const { productsState } = useProducts();
   const { selectedProduct } = productsState;
   const { productId } = useParams();
-  const { loading, errorMessage } = useQueryProductById(productId);
+  const { loading } = useQueryProductById(productId);
   return (
     <div class="page-wrapper">
       <Navbar />
