@@ -9,16 +9,16 @@ const Wishlist = () => {
   const { loading } = useQueryWishlistProducts();
   return (
     <>
-      <div class="page-wrapper">
+      <div className="page-wrapper">
         <Navbar />
-        <main class="main-section main-section-strech pd-md">
+        <main className="main-section main-section-strech pd-md">
           {!loading && (
-            <h1 class="flex-center">
+            <h1 className="flex-center">
               {wishlist.length ? "Wishlist" : "Your Wishlist is empty"}
             </h1>
           )}
           <Loader loading={loading} />
-          <div class="grid responsive-grid pd-sm">
+          <div className="grid responsive-grid pd-sm">
             {wishlist.map((product) => {
               const { _id } = product;
               return <Card key={_id} product={product} cardType="wishlist" />;

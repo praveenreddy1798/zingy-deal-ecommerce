@@ -15,15 +15,15 @@ export const Message = () => {
   return (
     <>
       {isVisible && successMessage && (
-        <div class="alert alert-success position-absolute">
-          <i class="fa fa-check-circle fa-2x"></i>
-          <p class="small-text semi-bold">{successMessage}</p>
+        <div className="alert alert-success position-absolute">
+          <i className="fa fa-check-circle fa-2x"></i>
+          <p className="small-text semi-bold">{successMessage}</p>
         </div>
       )}
       {isVisible && errorMessage && (
-        <div class="alert alert-danger position-absolute">
-          <i class="fa fa-exclamation-triangle fa-2x"></i>
-          <p class="small-text semi-bold">{errorMessage}</p>
+        <div className="alert alert-danger position-absolute">
+          <i className="fa fa-exclamation-triangle fa-2x"></i>
+          <p className="small-text semi-bold">{errorMessage}</p>
         </div>
       )}
     </>

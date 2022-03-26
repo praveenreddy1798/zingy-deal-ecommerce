@@ -13,12 +13,12 @@ const ProductsListing = () => {
   const { products } = productsState;
   const { loading } = useQueryAllProducts("/api/products", searchParam);
   return (
-    <div class="page-wrapper page-wrapper-filter-mob">
+    <div className="page-wrapper page-wrapper-filter-mob">
       <Navbar displaySearch />
       <ProductsFilterSection />
-      <main class="main-section main-section-filter-mob pd-md position-relative">
+      <main className="main-section main-section-filter-mob pd-md position-relative">
         <Loader loading={loading} />
-        <div class="grid responsive-grid w-100">
+        <div className="grid responsive-grid w-100">
           {!products.length && !loading && (
             <h1>Sorry, We couldn't find the product you are looking for.</h1>
           )}

@@ -18,14 +18,14 @@ export const Navbar = ({ displaySearch = false }) => {
 
   return (
     <>
-      <nav class="navbar bg-white border-light-grey flex-between no-wrap pd-xsm">
-        <Link to="/" class="nav-left">
-          <h3 class="pd-sm secondary-color nav-logo">Zingy Deal</h3>
+      <nav className="navbar bg-white border-light-grey flex-between no-wrap pd-xsm">
+        <Link to="/" className="nav-left">
+          <h3 className="pd-sm secondary-color nav-logo">Zingy Deal</h3>
         </Link>
         {displaySearch && (
           <div>
             <input
-              class="input input-secondary search"
+              className="input input-secondary search"
               type="search"
               placeholder="search by product name"
               value={searchValue}
@@ -35,51 +35,51 @@ export const Navbar = ({ displaySearch = false }) => {
               onKeyDown={(e) => handleSearch(e)}
             />
             <button
-              class="btn btn-secondary outline-none search-btn"
+              className="btn btn-secondary outline-none search-btn"
               onClick={(e) => handleSearch(e, true)}
             >
               Search
             </button>
           </div>
         )}
-        <div class="flex-evenly pd-sm col-gap-2 nav-right">
+        <div className="flex-evenly pd-sm col-gap-2 nav-right">
           <Link to="/login">
-            <button class="btn btn-action">Login</button>
+            <button className="btn btn-action">Login</button>
           </Link>
           <Link to="/wishlist">
-            <div class="badge-container icon-badge">
-              <button class="wishlist">
-                <i class="fa fa-heart-o fa-2x nav-wishlist"></i>
+            <div className="badge-container icon-badge">
+              <button className="wishlist">
+                <i className="fa fa-heart-o fa-2x nav-wishlist"></i>
               </button>
-              <span class="rounded">{wishlist.length}</span>
+              <span className="rounded">{wishlist.length}</span>
             </div>
           </Link>
           <Link to="/cart">
-            <div class="badge-container icon-badge">
+            <div className="badge-container icon-badge">
               <button>
-                <i class="fa fa-shopping-cart fa-2x cart nav-cart"></i>
+                <i className="fa fa-shopping-cart fa-2x cart nav-cart"></i>
               </button>
-              <span class="rounded">{cartItems}</span>
+              <span className="rounded">{cartItems}</span>
             </div>
           </Link>
         </div>
-        <div class="mobile-menu flex-evenly align-center">
+        <div className="mobile-menu flex-evenly align-center">
           <button
             onClick={() => setIsMobileMenuVisible(!isMobileMenuVisible)}
-            class="btn hamburger mobile-item secondary-color"
+            className="btn hamburger mobile-item secondary-color"
           >
             {isMobileMenuVisible ? (
-              <i class="fa fa-close fa-2x h-100"></i>
+              <i className="fa fa-close fa-2x h-100"></i>
             ) : (
-              <i class="fa fa-bars fa-2x h-100"></i>
+              <i className="fa fa-bars fa-2x h-100"></i>
             )}
           </button>
         </div>
       </nav>
       {isMobileMenuVisible && (
-        <div class="sidebar sidebar-mobile pd-md">
-          <ul class="sidebar-items flex-vertical align-center">
-            <Link class="active-sidebar-item" to="/login">
+        <div className="sidebar sidebar-mobile pd-md">
+          <ul className="sidebar-items flex-vertical align-center">
+            <Link className="active-sidebar-item" to="/login">
               <li>Login</li>
             </Link>
             <Link to="/wishlist">
