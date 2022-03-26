@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useProducts } from "../context/products";
 import { useAddToWishlist, useRemoveFromWishlist } from "../services";
-import { getStrippedText, inWishlist } from "../utils";
+import { getStrippedText, inWishlist, wishlistManipulation } from "../utils";
 
 export const Card = ({ product, cardType }) => {
   const {
@@ -23,30 +23,33 @@ export const Card = ({ product, cardType }) => {
   const { removeFromWishlist } = useRemoveFromWishlist();
   const { productsDispatch, productsState } = useProducts();
   const { wishlist } = productsState;
+  const wishlisted = inWishlist(wishlist, _id);
+  const token = localStorage.getItem("token");
   return (
     <div class="card" key={_id}>
       <div class="card-image-container h-100 w-100 position-relative flex-evenly">
         <img
           alt="product"
-          onClick={() => navigate(`/product/${_id}`)}
+          onClick={() => navigate(`/products/${_id}`)}
           class="card-image pointer"
           src={image}
           loading="lazy"
         />
         <button
           onClick={() =>
-            inWishlist(wishlist, _id)
-              ? removeFromWishlist(`/api/user/wishlist/${_id}`, product)
-              : addToWishlist(product)
+            token
+              ? wishlistManipulation(
+                  wishlisted,
+                  product,
+                  addToWishlist,
+                  removeFromWishlist
+                )
+              : navigate("/login")
           }
           class="btn btn-icon btn-icon-card position-absolute wishlist rounded flex-center"
         >
           <i
-            className={
-              inWishlist(wishlist, _id)
-                ? "fa fa-heart fa-2x"
-                : "fa fa-heart-o fa-2x"
-            }
+            className={wishlisted ? "fa fa-heart fa-2x" : "fa fa-heart-o fa-2x"}
           ></i>
         </button>
         {arrivalType && (

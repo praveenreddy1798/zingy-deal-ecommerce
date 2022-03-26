@@ -4,6 +4,7 @@ import { productsReducer } from "../reducers";
 export const productsInitialState = {
   originalData: [],
   products: [],
+  selectedProduct: {},
   wishlist: [],
   cart: [],
   cartItems: 0,

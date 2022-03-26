@@ -6,6 +6,7 @@ import Login from "./containers/Login";
 import Signup from "./containers/Signup";
 import Wishlist from "./containers/Wishlist";
 import { Message } from "./components/Message";
+import ProductDetail from "./containers/ProductDetail";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/wishlist" element={<Wishlist />} />
         <Route exact path="/cart" />
+        <Route exact path="/products/:productId" element={<ProductDetail />} />
       </Routes>
     </div>
   );
