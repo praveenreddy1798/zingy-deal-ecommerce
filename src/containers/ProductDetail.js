@@ -1,25 +1,24 @@
 import { useParams } from "react-router-dom";
-import { Loader } from "../components/Loader";
-import { Navbar } from "../components/Navbar";
-import { ProductDetailSection } from "../components/ProductDetailSection";
+import { Navbar, Loader, ProductDetailSection } from "../components";
 import { useProducts } from "../context/products";
 import { useQueryProductById } from "../services";
 import { SOMETHING_WENT_WRONG } from "../utils";
 const ProductDetail = () => {
-  const { productsState } = useProducts();
-  const { selectedProduct } = productsState;
+  const {
+    productsState: { selectedProduct },
+  } = useProducts();
   const { productId } = useParams();
   const { loading } = useQueryProductById(productId);
   return (
-    <div class="page-wrapper">
+    <div className="page-wrapper">
       <Navbar />
-      <main class="main-section main-section-strech">
+      <main className="main-section main-section-strech">
         <Loader loading={loading} />
         {!loading && selectedProduct?._id === productId ? (
           <ProductDetailSection product={selectedProduct} />
         ) : (
           !loading && (
-            <h1 class="flex-center mg-t-sm">{SOMETHING_WENT_WRONG}</h1>
+            <h1 className="flex-center mg-t-sm">{SOMETHING_WENT_WRONG}</h1>
           )
         )}
       </main>
@@ -27,4 +26,4 @@ const ProductDetail = () => {
   );
 };
 
-export default ProductDetail;
+export { ProductDetail };

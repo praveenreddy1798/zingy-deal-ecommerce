@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import { RenderForm } from "../components/RenderForm";
-import { Navbar } from "../components/Navbar";
+import { Navbar, RenderForm } from "../components";
 import { loginFormDataFields } from "../form-data/login";
 import { useForm } from "../hooks/useForm";
 import { validateLoginForm } from "../form-validation/login";
@@ -28,13 +27,13 @@ const Login = () => {
   }, [token, setValues]);
 
   return (
-    <div class="page-wrapper">
+    <div className="page-wrapper">
       <Navbar />
-      <main class="main-section main-section-strech flex-center pd-md">
-        <div class="flex-center bg-white w-max-content">
+      <main className="main-section main-section-strech flex-center pd-md">
+        <div className="flex-center bg-white w-max-content">
           <form onSubmit={handleSubmit}>
-            <div class="flex-vertical pd-xlg w-max-content">
-              <h3 class="text-align-center">Login</h3>
+            <div className="flex-vertical pd-xlg w-max-content">
+              <h3 className="text-align-center">Login</h3>
               <RenderForm
                 values={values}
                 errors={errors}
@@ -44,12 +43,12 @@ const Login = () => {
               />
               <button
                 onClick={handleSubmit}
-                class="btn btn-action w-100 mg-t-md"
+                className="btn btn-action w-100 mg-t-md"
               >
                 Login
               </button>
               <Link to="/signup">
-                <button class="btn btn-secondary outline outline-secondary w-100 mg-t-sm">
+                <button className="btn btn-secondary outline outline-secondary w-100 mg-t-sm">
                   Create New Account
                 </button>
               </Link>
@@ -61,4 +60,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export { Login };

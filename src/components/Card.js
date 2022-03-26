@@ -21,17 +21,19 @@ export const Card = ({ product, cardType }) => {
   const navigate = useNavigate();
   const { addToWishlist } = useAddToWishlist();
   const { removeFromWishlist } = useRemoveFromWishlist();
-  const { productsDispatch, productsState } = useProducts();
-  const { wishlist } = productsState;
+  const {
+    productsDispatch,
+    productsState: { wishlist },
+  } = useProducts();
   const wishlisted = inWishlist(wishlist, _id);
   const token = localStorage.getItem("token");
   return (
-    <div class="card" key={_id}>
-      <div class="card-image-container h-100 w-100 position-relative flex-evenly">
+    <div className="card" key={_id}>
+      <div className="card-image-container h-100 w-100 position-relative flex-evenly">
         <img
           alt="product"
           onClick={() => navigate(`/products/${_id}`)}
-          class="card-image pointer"
+          className="card-image pointer"
           src={image}
           loading="lazy"
         />
@@ -46,38 +48,38 @@ export const Card = ({ product, cardType }) => {
                 )
               : navigate("/login")
           }
-          class="btn btn-icon btn-icon-card position-absolute wishlist rounded flex-center"
+          className="btn btn-icon btn-icon-card position-absolute wishlist rounded flex-center"
         >
           <i
             className={wishlisted ? "fa fa-heart fa-2x" : "fa fa-heart-o fa-2x"}
           ></i>
         </button>
         {arrivalType && (
-          <h4 class="card-badge position-absolute">{arrivalType}</h4>
+          <h4 className="card-badge position-absolute">{arrivalType}</h4>
         )}
       </div>
-      <div class="flex-vertical mg-sm row-gap-p5">
-        <h4 class="text-align-left regular semi-bold">
+      <div className="flex-vertical mg-sm row-gap-p5">
+        <h4 className="text-align-left regular semi-bold">
           {getStrippedText(title, 20)}
         </h4>
-        <h3 class="flex gap-p5 regular-text">
-          <span class="primary-color">
+        <h3 className="flex gap-p5 regular-text">
+          <span className="primary-color">
             {rating}
-            <i class="fa fa-star star"></i>
+            <i className="fa fa-star star"></i>
           </span>
         </h3>
-        <div class="flex">
-          <p class="bold regular-text mg-r-xsm">₹{discountedPrice}</p>
-          <p class="regular-text bold line-through muted mg-r-xsm">
+        <div className="flex">
+          <p className="bold regular-text mg-r-xsm">₹{discountedPrice}</p>
+          <p className="regular-text bold line-through muted mg-r-xsm">
             ₹{originalPrice}
           </p>
-          <p class="flex bold primary-color regular-text">
+          <p className="flex bold primary-color regular-text">
             {discountPercentage}% off
           </p>
         </div>
-        <h4 class="flex regular">Ideal for {categoryName}</h4>
+        <h4 className="flex regular">Ideal for {categoryName}</h4>
 
-        <h4 class="flex regular">
+        <h4 className="flex regular">
           {deliveryCharge > 0 ? "Delivery charges applied" : "Free delivery"}
         </h4>
       </div>

@@ -1,24 +1,22 @@
-import { Card } from "../components/Card";
-import { ProductsFilterSection } from "../components/ProductsFilterSection";
-import { Navbar } from "../components/Navbar";
+import { Navbar, Card, Loader, ProductsFilterSection } from "../components";
 import { useQueryAllProducts } from "../services";
 import { useProducts } from "../context/products";
-import { Loader } from "../components/Loader";
 import { useLocation } from "react-router-dom";
 const ProductsListing = () => {
   const location = useLocation();
   let searchParam = new URLSearchParams(location.search);
   searchParam = Object.fromEntries(searchParam);
-  const { productsState } = useProducts();
-  const { products } = productsState;
+  const {
+    productsState: { products },
+  } = useProducts();
   const { loading } = useQueryAllProducts("/api/products", searchParam);
   return (
-    <div class="page-wrapper page-wrapper-filter-mob">
+    <div className="page-wrapper page-wrapper-filter-mob">
       <Navbar displaySearch />
       <ProductsFilterSection />
-      <main class="main-section main-section-filter-mob pd-md position-relative">
+      <main className="main-section main-section-filter-mob pd-md position-relative">
         <Loader loading={loading} />
-        <div class="grid responsive-grid w-100">
+        <div className="grid responsive-grid w-100">
           {!products.length && !loading && (
             <h1>Sorry, We couldn't find the product you are looking for.</h1>
           )}
@@ -32,4 +30,4 @@ const ProductsListing = () => {
   );
 };
 
-export default ProductsListing;
+export { ProductsListing };

@@ -9,14 +9,14 @@ export const Select = ({
   handleChange,
 }) => {
   return (
-    <div key={name} class="mg-t-sm">
-      <label for={name} class="flex regular-dark black-color mg-b-xxsm">
+    <div key={name} className="mg-t-sm">
+      <label for={name} className="flex regular-dark black-color mg-b-xxsm">
         {label}
       </label>
       <select
         name="state"
         id={name}
-        class="input select border-radius-sm"
+        className="input select border-radius-sm"
         value={value}
         onChange={handleChange}
       >
@@ -30,7 +30,7 @@ export const Select = ({
         ))}
       </select>
       {error && isSubmitting && (
-        <h4 class="flex regular-dark danger-color mg-t-xxsm">{error}</h4>
+        <h4 className="flex regular-dark danger-color mg-t-xxsm">{error}</h4>
       )}
     </div>
   );

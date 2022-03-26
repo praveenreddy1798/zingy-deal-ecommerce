@@ -1,12 +1,14 @@
 import { Route, Routes } from "react-router-dom";
 import "./index.css";
-import ProductsListing from "./containers/ProductsListing";
-import Home from "./containers/Home";
-import Login from "./containers/Login";
-import Signup from "./containers/Signup";
-import Wishlist from "./containers/Wishlist";
-import { Message } from "./components/Message";
-import ProductDetail from "./containers/ProductDetail";
+import {
+  Home,
+  ProductsListing,
+  Login,
+  Signup,
+  Wishlist,
+  ProductDetail,
+} from "./containers";
+import { Message } from "./components";
 
 export default function App() {
   return (
