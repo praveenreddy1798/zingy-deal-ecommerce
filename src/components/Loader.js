@@ -1,8 +1,8 @@
 export const Loader = ({ loading }) => {
   return (
     loading && (
-      <div class="flex-center h-100">
-        <div class="loader"></div>
+      <div className="loader-container position-absolute h-100">
+        <div className="loader"></div>
       </div>
     )
   );

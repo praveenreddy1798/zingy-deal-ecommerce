@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Navbar } from "../components/Navbar";
-import { RenderForm } from "../components/RenderForm";
+import { Navbar, RenderForm } from "../components";
 import { signupFormDataFields } from "../form-data/signup";
 import { validateSignupForm } from "../form-validation/signup";
 import { useForm } from "../hooks/useForm";
@@ -28,13 +27,13 @@ const Signup = () => {
     }
   }, [token, setValues]);
   return (
-    <div class="page-wrapper">
+    <div className="page-wrapper">
       <Navbar />
-      <main class="main-section main-section-strech flex-center pd-md">
-        <div class="flex-center bg-white w-max-content">
+      <main className="main-section main-section-strech flex-center pd-md">
+        <div className="flex-center bg-white w-max-content">
           <form onSubmit={handleSubmit}>
-            <div class="flex-vertical pd-xlg w-max-content">
-              <h3 class="text-align-center">Signup</h3>
+            <div className="flex-vertical pd-xlg w-max-content">
+              <h3 className="text-align-center">Signup</h3>
               <RenderForm
                 values={values}
                 errors={errors}
@@ -45,13 +44,13 @@ const Signup = () => {
               <Link to="/signup">
                 <button
                   onClick={handleSubmit}
-                  class="btn btn-action w-100 mg-t-md"
+                  className="btn btn-action w-100 mg-t-md"
                 >
                   Signup
                 </button>
               </Link>
               <Link to="/login">
-                <button class="btn btn-secondary outline outline-secondary w-100 mg-t-sm">
+                <button className="btn btn-secondary outline outline-secondary w-100 mg-t-sm">
                   Already have an account ?
                 </button>
               </Link>
@@ -63,4 +62,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export { Signup };

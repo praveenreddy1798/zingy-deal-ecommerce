@@ -8,6 +8,7 @@
 .main-section {
   background-color: var(--lynx-white);
   overflow-y: auto;
+  margin-top: 5.5rem;
 }
 
 .main-section-strech {
@@ -156,6 +157,12 @@
   height: 2.5rem;
   border: none;
   outline: none;
+}
+
+.loader-container {
+  top: 50%;
+  left: 50%;
+  z-index: 9999;
 }
 
 .loader {

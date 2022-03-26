@@ -10,7 +10,7 @@ export const useQueryAllProducts = (url, searchParam) => {
     method: "GET",
     url,
   };
-  const { data, loading, error } = useAxios(axiosParam);
+  const { data, loading } = useAxios(axiosParam);
   useEffect(() => {
     if (data?.products) {
       productsDispatch({
@@ -19,5 +19,23 @@ export const useQueryAllProducts = (url, searchParam) => {
       });
     }
   }, [data?.products, productsDispatch, searchParamKey, searchParamValue]);
-  return { loading, error };
+  return { loading };
+};
+
+export const useQueryProductById = (productId) => {
+  const { productsDispatch } = useProducts();
+  const axiosParam = {
+    method: "GET",
+    url: `/api/products/${productId}`,
+  };
+  const { data, loading, errorMessage } = useAxios(axiosParam);
+  useEffect(() => {
+    if (data?.product) {
+      productsDispatch({
+        type: "SET_SELECTED_PRODUCT",
+        payload: data.product,
+      });
+    }
+  }, [data?.product, productsDispatch]);
+  return { loading, errorMessage };
 };

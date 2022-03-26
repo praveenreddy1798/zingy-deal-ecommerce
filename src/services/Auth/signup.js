@@ -2,28 +2,25 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "../../context/toast";
 import { useAxios } from "../../hooks";
-import { MESSAGES } from "../../utils/constants";
+import { MESSAGES } from "../../utils";
 
 export const useSignup = () => {
   const [enabled, setEnabled] = useState(false);
   const [payload, setPayload] = useState(null);
   const [url, setUrl] = useState(null);
-  const [alertRequest, setAlertRequest] = useState(false);
   const navigate = useNavigate();
   const { toastDispatch } = useToast();
   const requestSignup = (url, payload) => {
     setPayload(payload);
     setEnabled(true);
     setUrl(url);
-    setAlertRequest(!alertRequest);
   };
   const axiosParam = {
     method: "POST",
     url,
-    body: payload,
+    payload,
   };
   const { data, loading, errorMessage } = useAxios(axiosParam, enabled);
-  console.log(data, loading, errorMessage);
   useEffect(() => {
     if (data?.encodedToken) {
       toastDispatch({
@@ -43,6 +40,6 @@ export const useSignup = () => {
         },
       });
     }
-  }, [data?.encodedToken, errorMessage, toastDispatch, alertRequest, navigate]);
+  }, [data?.encodedToken, errorMessage, toastDispatch, navigate]);
   return { token: data?.encodedToken, loading, requestSignup };
 };

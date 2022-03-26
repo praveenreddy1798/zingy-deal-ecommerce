@@ -3,13 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { useProducts } from "../../context/products";
 import { useToast } from "../../context/toast";
 import { useAxios } from "../../hooks";
-import { MESSAGES } from "../../utils/constants";
+import { MESSAGES } from "../../utils";
 
 export const useLogin = () => {
   const [enabled, setEnabled] = useState(false);
   const [payload, setPayload] = useState(null);
   const [url, setUrl] = useState(null);
-  const [alertRequest, setAlertRequest] = useState(false);
   const navigate = useNavigate();
   const { toastDispatch } = useToast();
   const { productsDispatch } = useProducts();
@@ -17,24 +16,24 @@ export const useLogin = () => {
     setPayload(payload);
     setEnabled(true);
     setUrl(url);
-    setAlertRequest(!alertRequest);
   };
   const axiosParam = {
     method: "POST",
     url,
-    body: {
-      email: payload?.email,
-      password: payload?.password,
-    },
+    payload,
   };
   const { data, loading, errorMessage } = useAxios(axiosParam, enabled);
   useEffect(() => {
     if (data?.encodedToken) {
-      const { encodedToken, foundUser } = data;
-      const { wishlist, cart } = foundUser;
-      localStorage.setItem("token", encodedToken);
-      productsDispatch({ type: "SET_WISHLIST", payload: { wishlist } });
-      productsDispatch({ type: "SET_CART", payload: { cart } });
+      const {
+        foundUser: { wishlist, cart },
+      } = data.foundUser;
+      localStorage.setItem("token", data.encodedToken);
+      productsDispatch({
+        type: "SET_WISHLIST_PRODUCTS",
+        payload: wishlist,
+      });
+      productsDispatch({ type: "SET_CART_PRODUCTS", payload: cart });
       toastDispatch({
         type: "SHOW_TOAST",
         payload: {
@@ -53,13 +52,13 @@ export const useLogin = () => {
       });
     }
   }, [
-    data,
+    data?.encodedToken,
     errorMessage,
     toastDispatch,
     enabled,
     navigate,
-    alertRequest,
     productsDispatch,
+    data,
   ]);
   return {
     token: data?.encodedToken,

@@ -1,6 +1,4 @@
-import { Input } from "./Input";
-import { Select } from "./Select";
-import { TextArea } from "./TextArea";
+import { Input, Select, TextArea } from ".";
 
 const renderFields = ({
   values,
