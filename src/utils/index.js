@@ -11,7 +11,11 @@ export {
 
 export { setProducts } from "./products";
 
-export { setWishlistProducts, inWishlist } from "./wishlist";
+export {
+  setWishlistProducts,
+  inWishlist,
+  wishlistManipulation,
+} from "./wishlist";
 
 export { setCartProducts } from "./cart";
 

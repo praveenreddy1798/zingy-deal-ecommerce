@@ -1,9 +1,6 @@
-import { Card } from "../components/Card";
-import { ProductsFilterSection } from "../components/ProductsFilterSection";
-import { Navbar } from "../components/Navbar";
+import { Navbar, Card, Loader, ProductsFilterSection } from "../components";
 import { useQueryAllProducts } from "../services";
 import { useProducts } from "../context/products";
-import { Loader } from "../components/Loader";
 import { useLocation } from "react-router-dom";
 const ProductsListing = () => {
   const location = useLocation();
@@ -32,4 +29,4 @@ const ProductsListing = () => {
   );
 };
 
-export default ProductsListing;
+export { ProductsListing };

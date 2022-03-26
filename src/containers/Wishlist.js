@@ -1,6 +1,4 @@
-import { Card } from "../components/Card";
-import { Loader } from "../components/Loader";
-import { Navbar } from "../components/Navbar";
+import { Loader, Card, Navbar } from "../components";
 import { useProducts } from "../context/products";
 import { useQueryWishlistProducts } from "../services";
 const Wishlist = () => {
@@ -30,4 +28,4 @@ const Wishlist = () => {
   );
 };
 
-export default Wishlist;
+export { Wishlist };

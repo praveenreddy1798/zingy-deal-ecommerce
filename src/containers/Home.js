@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Navbar } from "../components/Navbar";
+import { Navbar } from "../components";
 import "../themes/home.css";
 
 const Home = () => {
@@ -122,4 +122,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export { Home };

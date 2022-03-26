@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import { RenderForm } from "../components/RenderForm";
-import { Navbar } from "../components/Navbar";
+import { Navbar, RenderForm } from "../components";
 import { loginFormDataFields } from "../form-data/login";
 import { useForm } from "../hooks/useForm";
 import { validateLoginForm } from "../form-validation/login";
@@ -61,4 +60,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export { Login };

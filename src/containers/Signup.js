@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Navbar } from "../components/Navbar";
-import { RenderForm } from "../components/RenderForm";
+import { Navbar, RenderForm } from "../components";
 import { signupFormDataFields } from "../form-data/signup";
 import { validateSignupForm } from "../form-validation/signup";
 import { useForm } from "../hooks/useForm";
@@ -63,4 +62,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export { Signup };

@@ -1,7 +1,5 @@
 import { useParams } from "react-router-dom";
-import { Loader } from "../components/Loader";
-import { Navbar } from "../components/Navbar";
-import { ProductDetailSection } from "../components/ProductDetailSection";
+import { Navbar, Loader, ProductDetailSection } from "../components";
 import { useProducts } from "../context/products";
 import { useQueryProductById } from "../services";
 import { SOMETHING_WENT_WRONG } from "../utils";
@@ -27,4 +25,4 @@ const ProductDetail = () => {
   );
 };
 
-export default ProductDetail;
+export { ProductDetail };
