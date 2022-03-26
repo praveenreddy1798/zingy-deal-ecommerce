@@ -5,8 +5,10 @@ import { inWishlist, wishlistManipulation } from "../utils";
 export const ProductDetailSection = ({ product }) => {
   const navigate = useNavigate();
   const { addToWishlist } = useAddToWishlist();
-  const { productsDispatch, productsState } = useProducts();
-  const { wishlist } = productsState;
+  const {
+    productsDispatch,
+    productsState: { wishlist },
+  } = useProducts();
   const {
     title,
     inCart,

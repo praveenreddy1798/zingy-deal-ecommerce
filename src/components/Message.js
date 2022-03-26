@@ -3,9 +3,12 @@ import { useToast } from "../context/toast";
 import { dispatchHideToastWithDelay } from "../utils/toast";
 
 export const Message = () => {
-  const { toastState, toastDispatch } = useToast();
-  const { toast } = toastState;
-  const { isVisible, successMessage, errorMessage } = toast;
+  const {
+    toastState: {
+      toast: { isVisible, successMessage, errorMessage },
+    },
+    toastDispatch,
+  } = useToast();
 
   useEffect(() => {
     if (isVisible) {

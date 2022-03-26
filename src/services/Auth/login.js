@@ -25,8 +25,9 @@ export const useLogin = () => {
   const { data, loading, errorMessage } = useAxios(axiosParam, enabled);
   useEffect(() => {
     if (data?.encodedToken) {
-      const foundUser = data.foundUser;
-      const { wishlist, cart } = foundUser;
+      const {
+        foundUser: { wishlist, cart },
+      } = data.foundUser;
       localStorage.setItem("token", data.encodedToken);
       productsDispatch({
         type: "SET_WISHLIST_PRODUCTS",

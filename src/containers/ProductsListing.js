@@ -6,8 +6,9 @@ const ProductsListing = () => {
   const location = useLocation();
   let searchParam = new URLSearchParams(location.search);
   searchParam = Object.fromEntries(searchParam);
-  const { productsState } = useProducts();
-  const { products } = productsState;
+  const {
+    productsState: { products },
+  } = useProducts();
   const { loading } = useQueryAllProducts("/api/products", searchParam);
   return (
     <div className="page-wrapper page-wrapper-filter-mob">

@@ -2,8 +2,9 @@ import { Loader, Card, Navbar } from "../components";
 import { useProducts } from "../context/products";
 import { useQueryWishlistProducts } from "../services";
 const Wishlist = () => {
-  const { productsState } = useProducts();
-  const { wishlist } = productsState;
+  const {
+    productsState: { wishlist },
+  } = useProducts();
   const { loading } = useQueryWishlistProducts();
   return (
     <>

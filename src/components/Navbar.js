@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import { useProducts } from "../context/products";
 export const Navbar = ({ displaySearch = false }) => {
   const [isMobileMenuVisible, setIsMobileMenuVisible] = useState(false);
-  const { productsState, productsDispatch } = useProducts();
+  const {
+    productsState: { cartItems, wishlist },
+    productsDispatch,
+  } = useProducts();
   const [searchValue, setSearchValue] = useState("");
-  const { cartItems, wishlist } = productsState;
 
   const handleSearch = (e, onSearchClicked = false) => {
     if (e.key === "Enter" || onSearchClicked) {

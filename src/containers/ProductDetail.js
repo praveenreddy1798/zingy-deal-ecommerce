@@ -4,8 +4,9 @@ import { useProducts } from "../context/products";
 import { useQueryProductById } from "../services";
 import { SOMETHING_WENT_WRONG } from "../utils";
 const ProductDetail = () => {
-  const { productsState } = useProducts();
-  const { selectedProduct } = productsState;
+  const {
+    productsState: { selectedProduct },
+  } = useProducts();
   const { productId } = useParams();
   const { loading } = useQueryProductById(productId);
   return (

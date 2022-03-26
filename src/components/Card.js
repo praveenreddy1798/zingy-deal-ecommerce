@@ -21,8 +21,10 @@ export const Card = ({ product, cardType }) => {
   const navigate = useNavigate();
   const { addToWishlist } = useAddToWishlist();
   const { removeFromWishlist } = useRemoveFromWishlist();
-  const { productsDispatch, productsState } = useProducts();
-  const { wishlist } = productsState;
+  const {
+    productsDispatch,
+    productsState: { wishlist },
+  } = useProducts();
   return (
     <div className="card" key={_id}>
       <div className="card-image-container h-100 w-100 position-relative flex-evenly">
