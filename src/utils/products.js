@@ -1,4 +1,5 @@
 import { productsInitialState } from "../context/products";
+import { cartReducer } from "./cart";
 import {
   ACCEPTED_ARRIVAL_TYPE_FILTERS,
   ACCEPTED_CATEGORY_FILTERS,
@@ -21,10 +22,12 @@ export const setProducts = (productsState, action) => {
   ) {
     selectedOtherFilters.push(searchParamValue);
   }
+  const { cartItems, wishlist, cart } = productsState;
   const state = {
     ...productsInitialState,
-    wishlist: productsState.wishlist,
-    cart: productsState.cart,
+    cartItems,
+    wishlist,
+    cart,
     originalData: products,
     selectedCategoryFilters,
     selectedOtherFilters,
@@ -34,7 +37,6 @@ export const setProducts = (productsState, action) => {
   });
   return {
     ...state,
-    originalData: products,
     products: filteredProducts,
   };
 };
@@ -43,5 +45,25 @@ export const setSelectedProduct = (state, action) => {
   return {
     ...state,
     selectedProduct: action.payload,
+  };
+};
+
+export const setCartWishlistProducts = (state, action) => {
+  const { cart, wishlist } = action.payload;
+  const { totalPrice, totalDiscount, totalDeliveryCharge, cartItems } =
+    cart.reduce(cartReducer, {
+      totalPrice: 0,
+      totalDiscount: 0,
+      totalDeliveryCharge: 0,
+      cartItems: 0,
+    });
+  return {
+    ...state,
+    cart,
+    wishlist,
+    cartItems,
+    totalPrice,
+    totalDiscount,
+    totalDeliveryCharge,
   };
 };

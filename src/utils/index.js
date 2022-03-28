@@ -9,7 +9,11 @@ export {
   filterProductsByAppliedFilters,
 } from "./products-filter";
 
-export { setProducts, setSelectedProduct } from "./products";
+export {
+  setProducts,
+  setSelectedProduct,
+  setCartWishlistProducts,
+} from "./products";
 
 export {
   setWishlistProducts,
@@ -17,7 +21,7 @@ export {
   wishlistManipulation,
 } from "./wishlist";
 
-export { setCartProducts } from "./cart";
+export { setCartProducts, inCart } from "./cart";
 
 export { showToast, hideToast } from "./toast";
 

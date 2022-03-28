@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useProducts } from "../../context/products";
-import { useToast } from "../../context/toast";
+import { useAuth, useToast, useProducts } from "../../context";
 import { useAxios } from "../../hooks";
 import { MESSAGES } from "../../utils";
 
@@ -12,6 +11,7 @@ export const useLogin = () => {
   const navigate = useNavigate();
   const { toastDispatch } = useToast();
   const { productsDispatch } = useProducts();
+  const { setAuth } = useAuth();
   const requestLogin = (url, payload) => {
     setPayload(payload);
     setEnabled(true);
@@ -25,15 +25,18 @@ export const useLogin = () => {
   const { data, loading, errorMessage } = useAxios(axiosParam, enabled);
   useEffect(() => {
     if (data?.encodedToken) {
-      const {
-        foundUser: { wishlist, cart },
-      } = data.foundUser;
+      const foundUser = data.foundUser;
+      const { wishlist, cart } = foundUser;
       localStorage.setItem("token", data.encodedToken);
-      productsDispatch({
-        type: "SET_WISHLIST_PRODUCTS",
-        payload: wishlist,
+      setAuth({
+        isAuth: true,
+        token: data?.encodedToken,
+        userDetails: foundUser,
       });
-      productsDispatch({ type: "SET_CART_PRODUCTS", payload: cart });
+      productsDispatch({
+        type: "SET_WISHLIST_CART_PRODUCTS",
+        payload: { wishlist, cart },
+      });
       toastDispatch({
         type: "SHOW_TOAST",
         payload: {
@@ -58,7 +61,8 @@ export const useLogin = () => {
     enabled,
     navigate,
     productsDispatch,
-    data,
+    data?.foundUser,
+    setAuth,
   ]);
   return {
     token: data?.encodedToken,

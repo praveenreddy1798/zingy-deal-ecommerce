@@ -5,4 +5,13 @@ export {
   useQueryWishlistProducts,
   useAddToWishlist,
   useRemoveFromWishlist,
+  useMoveWishlistToCart,
 } from "./wishlist";
+
+export {
+  useQueryCartProducts,
+  useAddToCart,
+  useRemoveFromCart,
+  useMoveCartToWishlist,
+  useHandleCartQuantity,
+} from "./cart";

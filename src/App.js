@@ -7,8 +7,9 @@ import {
   Signup,
   Wishlist,
   ProductDetail,
+  Cart,
 } from "./containers";
-import { Message } from "./components";
+import { Message, PrivateRoute } from "./components";
 
 export default function App() {
   return (
@@ -19,8 +20,24 @@ export default function App() {
         <Route exact path="/" element={<Home />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/signup" element={<Signup />} />
-        <Route exact path="/wishlist" element={<Wishlist />} />
-        <Route exact path="/cart" />
+        <Route
+          exact
+          path="/wishlist"
+          element={
+            <PrivateRoute>
+              <Wishlist />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          exact
+          path="/cart"
+          element={
+            <PrivateRoute>
+              <Cart />
+            </PrivateRoute>
+          }
+        />
         <Route exact path="/products/:productId" element={<ProductDetail />} />
       </Routes>
     </div>
