@@ -4,3 +4,4 @@ export { ProductDetail } from "./ProductDetail";
 export { ProductsListing } from "./ProductsListing";
 export { Signup } from "./Signup";
 export { Wishlist } from "./Wishlist";
+export { Cart } from "./Cart";

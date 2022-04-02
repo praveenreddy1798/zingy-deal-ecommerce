@@ -9,6 +9,7 @@ import {
   setWishlistProducts,
   setCartProducts,
   setSelectedProduct,
+  setCartWishlistProducts,
 } from "../utils";
 
 export const productsReducer = (state, action) => {
@@ -17,6 +18,8 @@ export const productsReducer = (state, action) => {
       return setProducts(state, action);
     case "SET_SELECTED_PRODUCT":
       return setSelectedProduct(state, action);
+    case "SET_CART_WISHLIST_PRODUCTS":
+      return setCartWishlistProducts(state, action);
     case "SET_WISHLIST_PRODUCTS":
       return setWishlistProducts(state, action);
     case "SET_CART_PRODUCTS":

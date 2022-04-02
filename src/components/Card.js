@@ -1,12 +1,21 @@
 import { useNavigate } from "react-router-dom";
-import { useProducts } from "../context/products";
-import { useAddToWishlist, useRemoveFromWishlist } from "../services";
-import { getStrippedText, inWishlist, wishlistManipulation } from "../utils";
+import { useAuth, useProducts } from "../context";
+import {
+  useAddToCart,
+  useAddToWishlist,
+  useMoveWishlistToCart,
+  useRemoveFromWishlist,
+} from "../services";
+import {
+  getStrippedText,
+  inWishlist,
+  wishlistManipulation,
+  inCart,
+} from "../utils";
 
 export const Card = ({ product, cardType }) => {
   const {
     title,
-    inCart,
     _id,
     originalPrice,
     discountedPrice,
@@ -20,13 +29,17 @@ export const Card = ({ product, cardType }) => {
   } = product;
   const navigate = useNavigate();
   const { addToWishlist } = useAddToWishlist();
-  const { removeFromWishlist } = useRemoveFromWishlist();
   const {
-    productsDispatch,
-    productsState: { wishlist },
+    auth: { isAuth },
+  } = useAuth();
+  const { removeFromWishlist } = useRemoveFromWishlist();
+  const { moveWishlistToCart } = useMoveWishlistToCart();
+  const { addToCart } = useAddToCart();
+  const {
+    productsState: { wishlist, cart },
   } = useProducts();
   const wishlisted = inWishlist(wishlist, _id);
-  const token = localStorage.getItem("token");
+  const inCartProduct = inCart(cart, _id);
   return (
     <div className="card" key={_id}>
       <div className="card-image-container h-100 w-100 position-relative flex-evenly">
@@ -39,7 +52,7 @@ export const Card = ({ product, cardType }) => {
         />
         <button
           onClick={() =>
-            token
+            isAuth
               ? wishlistManipulation(
                   wishlisted,
                   product,
@@ -97,12 +110,13 @@ export const Card = ({ product, cardType }) => {
       {inStock && (
         <button
           onClick={() =>
-            inCart
-              ? navigate("/cart")
-              : productsDispatch({
-                  type: "ADD_TO_CART",
-                  payload: { ...product },
-                })
+            isAuth
+              ? !inCartProduct
+                ? cardType === "wishlist"
+                  ? moveWishlistToCart(product)
+                  : addToCart(product)
+                : navigate("/cart")
+              : navigate("/login")
           }
           className={
             cardType === "wishlist"
@@ -110,7 +124,11 @@ export const Card = ({ product, cardType }) => {
               : "btn btn-action w-100"
           }
         >
-          {inCart ? "Go to Cart" : "Add to Cart"}
+          {inCartProduct
+            ? "Go to Cart"
+            : cardType === "wishlist"
+            ? "Move to Cart"
+            : "Add to Cart"}
         </button>
       )}
     </div>

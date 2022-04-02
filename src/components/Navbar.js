@@ -1,13 +1,18 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useProducts } from "../context/products";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth, useProducts } from "../context";
 export const Navbar = ({ displaySearch = false }) => {
   const [isMobileMenuVisible, setIsMobileMenuVisible] = useState(false);
+  const navigate = useNavigate();
   const {
     productsState: { cartItems, wishlist },
     productsDispatch,
   } = useProducts();
   const [searchValue, setSearchValue] = useState("");
+  const {
+    auth: { isAuth },
+    setAuth,
+  } = useAuth();
 
   const handleSearch = (e, onSearchClicked = false) => {
     if (e.key === "Enter" || onSearchClicked) {
@@ -16,6 +21,12 @@ export const Navbar = ({ displaySearch = false }) => {
         payload: searchValue,
       });
     }
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    setAuth({ isAuth: false, token: null, userDetails: {} });
+    navigate("/login");
   };
 
   return (
@@ -45,15 +56,18 @@ export const Navbar = ({ displaySearch = false }) => {
           </div>
         )}
         <div className="flex-evenly pd-sm col-gap-2 nav-right">
-          <Link to="/login">
-            <button className="btn btn-action">Login</button>
-          </Link>
+          <button
+            onClick={() => (isAuth ? logout() : navigate("/login"))}
+            className="btn btn-action"
+          >
+            {isAuth ? "Logout" : "Login"}
+          </button>
           <Link to="/wishlist">
             <div className="badge-container icon-badge">
               <button className="wishlist">
                 <i className="fa fa-heart-o fa-2x nav-wishlist"></i>
               </button>
-              <span className="rounded">{wishlist.length}</span>
+              {isAuth && <span className="rounded">{wishlist.length}</span>}
             </div>
           </Link>
           <Link to="/cart">
@@ -61,7 +75,7 @@ export const Navbar = ({ displaySearch = false }) => {
               <button>
                 <i className="fa fa-shopping-cart fa-2x cart nav-cart"></i>
               </button>
-              <span className="rounded">{cartItems}</span>
+              {isAuth && <span className="rounded">{cartItems}</span>}
             </div>
           </Link>
         </div>

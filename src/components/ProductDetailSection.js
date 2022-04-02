@@ -1,17 +1,19 @@
 import { useNavigate } from "react-router-dom";
-import { useProducts } from "../context/products";
-import { useAddToWishlist } from "../services";
-import { inWishlist, wishlistManipulation } from "../utils";
+import { useProducts, useAuth } from "../context";
+import { useAddToWishlist, useAddToCart } from "../services";
+import { inWishlist, wishlistManipulation, inCart } from "../utils";
 export const ProductDetailSection = ({ product }) => {
   const navigate = useNavigate();
-  const { addToWishlist } = useAddToWishlist();
   const {
-    productsDispatch,
-    productsState: { wishlist },
+    auth: { isAuth },
+  } = useAuth();
+  const { addToWishlist } = useAddToWishlist();
+  const { addToCart } = useAddToCart();
+  const {
+    productsState: { wishlist, cart },
   } = useProducts();
   const {
     title,
-    inCart,
     _id,
     originalPrice,
     discountedPrice,
@@ -24,11 +26,16 @@ export const ProductDetailSection = ({ product }) => {
     image,
   } = product;
   const wishlisted = inWishlist(wishlist, _id);
-  const token = localStorage.getItem("token");
+  const inCartProduct = inCart(cart, _id);
   return (
     <div className="flex-center pd-md h-100">
       <div className="flex-center gap-1 bg-white border-light-grey">
-        <img className="product-detail-image" src={image} alt="product" />
+        <img
+          className="product-detail-image"
+          src={image}
+          alt="product"
+          loading="lazy"
+        />
         <div className="flex-vertical justify-between product-detail-section pd-md">
           <div>
             <h2 className="flex regular regular-dark">{title}</h2>
@@ -74,21 +81,20 @@ export const ProductDetailSection = ({ product }) => {
               {inStock && (
                 <button
                   onClick={() =>
-                    inCart
-                      ? navigate("/cart")
-                      : productsDispatch({
-                          type: "ADD_TO_CART",
-                          payload: { ...product },
-                        })
+                    isAuth
+                      ? !inCartProduct
+                        ? addToCart(product)
+                        : navigate("/cart")
+                      : navigate("/login")
                   }
                   className="btn btn-secondary w-100"
                 >
-                  {inCart ? "Go to Cart" : "Add to Cart"}
+                  {inCartProduct ? "Go to Cart" : "Add to Cart"}
                 </button>
               )}
               <button
                 onClick={() =>
-                  token
+                  isAuth
                     ? !wishlisted
                       ? wishlistManipulation(
                           wishlisted,

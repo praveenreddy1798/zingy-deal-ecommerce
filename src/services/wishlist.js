@@ -1,16 +1,18 @@
-import { useEffect } from "react";
-import { useState } from "react/cjs/react.development";
-import { useProducts } from "../context/products";
-import { useToast } from "../context/toast";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useProducts, useAuth, useToast } from "../context";
 import { useAxios } from "../hooks";
 import { MESSAGES } from "../utils";
 
 export const useQueryWishlistProducts = () => {
   const { productsDispatch } = useProducts();
+  const {
+    auth: { token },
+  } = useAuth();
   const axiosParam = {
     method: "GET",
     url: "/api/user/wishlist",
-    token: localStorage.getItem("token"),
+    token,
   };
   const { data, loading, error } = useAxios(axiosParam);
   useEffect(() => {
@@ -28,11 +30,14 @@ export const useAddToWishlist = () => {
   const [enabled, setEnabled] = useState(false);
   const [product, setProduct] = useState(null);
   const { productsDispatch } = useProducts();
+  const {
+    auth: { token },
+  } = useAuth();
   const { toastDispatch } = useToast();
   const axiosParam = {
     method: "POST",
     url: "/api/user/wishlist",
-    token: localStorage.getItem("token"),
+    token,
     payload: product,
   };
   const { data, loading, errorMessage } = useAxios(axiosParam, enabled);
@@ -71,11 +76,14 @@ export const useRemoveFromWishlist = () => {
   const [enabled, setEnabled] = useState(false);
   const [product, setProduct] = useState(null);
   const { productsDispatch } = useProducts();
+  const {
+    auth: { token },
+  } = useAuth();
   const { toastDispatch } = useToast();
   const axiosParam = {
     method: "DELETE",
     url,
-    token: localStorage.getItem("token"),
+    token,
     payload: product,
   };
   const removeFromWishlist = (url, product) => {
@@ -108,4 +116,59 @@ export const useRemoveFromWishlist = () => {
     }
   }, [data?.wishlist, errorMessage, productsDispatch, toastDispatch]);
   return { loading, removeFromWishlist };
+};
+
+export const useMoveWishlistToCart = () => {
+  const { productsDispatch } = useProducts();
+  const {
+    auth: { isAuth, token },
+  } = useAuth();
+  const { toastDispatch } = useToast();
+  const headers = isAuth ? { authorization: token } : null;
+  const moveWishlistToCart = async (product) => {
+    const id = product._id;
+    try {
+      const wishlistRemovalPromise = axios({
+        url: `/api/user/wishlist/${id}`,
+        method: "DELETE",
+        headers,
+      });
+      const cartAddPromise = axios({
+        url: "/api/user/cart",
+        method: "POST",
+        headers,
+        data: { product },
+      });
+      const [wishlistResponse, cartResponse] = await Promise.all([
+        wishlistRemovalPromise,
+        cartAddPromise,
+      ]);
+      const {
+        data: { cart },
+      } = cartResponse;
+      const {
+        data: { wishlist },
+      } = wishlistResponse;
+      productsDispatch({
+        type: "SET_CART_WISHLIST_PRODUCTS",
+        payload: { cart, wishlist },
+      });
+      toastDispatch({
+        type: "SHOW_TOAST",
+        payload: {
+          successMessage: MESSAGES.WISHLIST_TO_CART.ADD,
+          errorMessage: null,
+        },
+      });
+    } catch (error) {
+      toastDispatch({
+        type: "SHOW_TOAST",
+        payload: {
+          successMessage: null,
+          errorMessage: MESSAGES.WISHLIST_TO_CART.ERROR,
+        },
+      });
+    }
+  };
+  return { moveWishlistToCart };
 };
