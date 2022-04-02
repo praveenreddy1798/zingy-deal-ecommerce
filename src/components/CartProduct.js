@@ -35,7 +35,7 @@ export const CartProduct = ({ product }) => {
         <img
           class="card-image pointer"
           src={image}
-          alt="product"
+          alt="cart-product"
           loading="lazy"
           onClick={() => navigate(`/products/${_id}`)}
         />
