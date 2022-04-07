@@ -13,6 +13,7 @@ export {
   setProducts,
   setSelectedProduct,
   setCartWishlistProducts,
+  resetToInitialState,
 } from "./products";
 
 export {
@@ -34,4 +35,6 @@ export {
   ACCEPTED_CATEGORY_FILTERS,
   MESSAGES,
   SOMETHING_WENT_WRONG,
+  NAV_ACTIVE_BACKGROUND,
+  NAV_ACTIVE_COLOR,
 } from "./constants";

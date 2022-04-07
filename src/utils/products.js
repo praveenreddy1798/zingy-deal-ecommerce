@@ -67,3 +67,7 @@ export const setCartWishlistProducts = (state, action) => {
     totalDeliveryCharge,
   };
 };
+
+export const resetToInitialState = () => ({
+  ...productsInitialState,
+});
