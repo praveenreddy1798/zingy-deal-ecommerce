@@ -4,7 +4,7 @@ Zingy Deal is an ecommerce store for clothing line.
 
 ## Application Links
 
-[Zingy Deal Live](https://zingy-tube.netlify.app/)
+[Zingy Deal Live](https://zingy-deal-ecommerce.netlify.app/)
 
 ## Test User Credentials
 
