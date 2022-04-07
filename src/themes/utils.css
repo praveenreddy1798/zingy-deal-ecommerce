@@ -227,6 +227,12 @@
   transform: translateX(-50%);
   z-index: 2;
 }
+.primary-color {
+  color: var(--primary-dark);
+}
+.secondary-color {
+  color: var(--secondary-dark);
+}
 
 @media only screen and (max-width: 600px) {
   .page-wrapper-filter-mob {

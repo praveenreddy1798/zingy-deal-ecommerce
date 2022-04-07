@@ -10,6 +10,7 @@ import {
   setCartProducts,
   setSelectedProduct,
   setCartWishlistProducts,
+  resetToInitialState,
 } from "../utils";
 
 export const productsReducer = (state, action) => {
@@ -36,6 +37,8 @@ export const productsReducer = (state, action) => {
       return searchByProductName(state, action);
     case "CLEAR_PRODUCTS_FILTER":
       return clearProductsFilter(state, action);
+    case "RESET_TO_INITIAL_STATE":
+      return resetToInitialState();
     default:
       return state;
   }

@@ -38,3 +38,7 @@ export const MESSAGES = {
       "Sorry, couldn't move product from wishlist to cart. Try again later",
   },
 };
+
+export const NAV_ACTIVE_BACKGROUND = "#f5f3ff";
+
+export const NAV_ACTIVE_COLOR = "#45198b";

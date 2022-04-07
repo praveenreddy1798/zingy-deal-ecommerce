@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation, NavLink } from "react-router-dom";
 import { useAuth, useProducts } from "../context";
+import { NAV_ACTIVE_BACKGROUND, NAV_ACTIVE_COLOR } from "../utils";
 export const Navbar = ({ displaySearch = false }) => {
   const [isMobileMenuVisible, setIsMobileMenuVisible] = useState(false);
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const {
     productsState: { cartItems, wishlist },
     productsDispatch,
@@ -26,14 +28,32 @@ export const Navbar = ({ displaySearch = false }) => {
   const logout = () => {
     localStorage.removeItem("token");
     setAuth({ isAuth: false, token: null, userDetails: {} });
+    productsDispatch({
+      type: "RESET_TO_INITIAL_STATE",
+    });
     navigate("/login");
+  };
+
+  const getStyles = ({ isActive }) => {
+    if (isActive) {
+      return {
+        backgroundColor: NAV_ACTIVE_BACKGROUND,
+        color: NAV_ACTIVE_COLOR,
+      };
+    }
   };
 
   return (
     <>
       <nav className="navbar bg-white border-light-grey flex-between no-wrap pd-xsm">
         <Link to="/" className="nav-left">
-          <h3 className="pd-sm secondary-color nav-logo">Zingy Deal</h3>
+          <h3
+            className={`pd-sm nav-logo ${
+              pathname === "/" ? "primary-color" : "secondary-color"
+            }`}
+          >
+            Zingy Deal
+          </h3>
         </Link>
         {displaySearch && (
           <div>
@@ -65,7 +85,13 @@ export const Navbar = ({ displaySearch = false }) => {
           <Link to="/wishlist">
             <div className="badge-container icon-badge">
               <button className="wishlist">
-                <i className="fa fa-heart-o fa-2x nav-wishlist"></i>
+                <i
+                  className={`fa fa-heart-o fa-2x nav-wishlist ${
+                    pathname === "/wishlist"
+                      ? "primary-color"
+                      : "secondary-color"
+                  } `}
+                ></i>
               </button>
               {isAuth && <span className="rounded">{wishlist.length}</span>}
             </div>
@@ -73,7 +99,11 @@ export const Navbar = ({ displaySearch = false }) => {
           <Link to="/cart">
             <div className="badge-container icon-badge">
               <button>
-                <i className="fa fa-shopping-cart fa-2x cart nav-cart"></i>
+                <i
+                  className={`fa fa-shopping-cart fa-2x cart nav-cart ${
+                    pathname === "/cart" ? "primary-color" : "secondary-color"
+                  }`}
+                ></i>
               </button>
               {isAuth && <span className="rounded">{cartItems}</span>}
             </div>
@@ -95,15 +125,15 @@ export const Navbar = ({ displaySearch = false }) => {
       {isMobileMenuVisible && (
         <div className="sidebar sidebar-mobile pd-md">
           <ul className="sidebar-items flex-vertical align-center">
-            <Link className="active-sidebar-item" to="/login">
+            <NavLink style={getStyles} to="/login">
               <li>Login</li>
-            </Link>
-            <Link to="/wishlist">
+            </NavLink>
+            <NavLink style={getStyles} to="/wishlist">
               <li>Wishlist</li>
-            </Link>
-            <Link to="/cart">
+            </NavLink>
+            <NavLink style={getStyles} to="/cart">
               <li>Cart</li>
-            </Link>
+            </NavLink>
           </ul>
         </div>
       )}
